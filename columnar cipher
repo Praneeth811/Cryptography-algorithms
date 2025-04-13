@@ -25,7 +25,7 @@ void get_order(char *key, int order[]) {
         for (int j = 0; j < len; j++) {
             if (temp[i] == sorted[j]) {
                 order[i] = j;
-                sorted[j] = ' '; // avoid duplicates
+                sorted[j] = ' '; 
                 break;
             }
         }
@@ -39,7 +39,6 @@ void encrypt_columnar(char *text, char *key, char *encrypted) {
     int key_len = strlen(key);
     int text_len = strlen(text);
 
-    // Padding text to fit matrix
     int rows = (text_len + key_len - 1) / key_len;
     int padded_len = rows * key_len;
     char padded[padded_len + 1];
@@ -48,18 +47,15 @@ void encrypt_columnar(char *text, char *key, char *encrypted) {
         padded[i] = 'X';
     padded[padded_len] = '\0';
 
-    // Create matrix
     char matrix[rows][key_len];
     int index = 0;
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < key_len; j++)
             matrix[i][j] = padded[index++];
 
-    // Get column order
     int order[key_len];
     get_order(key, order);
 
-    // Encrypt by reading columns in keyword order
     index = 0;
     for (int k = 0; k < key_len; k++) {
         for (int i = 0; i < key_len; i++) {
