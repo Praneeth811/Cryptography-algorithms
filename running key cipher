@@ -2,7 +2,6 @@
 #include <string.h>
 #include <ctype.h>
 
-// Encrypt with Running Key Cipher
 void running_key_encrypt(const char *plaintext, const char *key, char *ciphertext) {
     int pt_len = strlen(plaintext);
 
@@ -20,7 +19,6 @@ void running_key_encrypt(const char *plaintext, const char *key, char *ciphertex
     ciphertext[pt_len] = '\0';
 }
 
-// Decrypt with Running Key Cipher
 void running_key_decrypt(const char *ciphertext, const char *key, char *plaintext) {
     int ct_len = strlen(ciphertext);
 
