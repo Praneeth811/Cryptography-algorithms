@@ -2,16 +2,13 @@
 #include <string.h>
 #include <ctype.h>
 
-// Encrypt with Auto Key Cipher
 void auto_key_encrypt(const char *text, const char *keyword, char *encrypted) {
     int text_len = strlen(text);
     int key_len = strlen(keyword);
     char key[512];
 
-    // Start with keyword
     strcpy(key, keyword);
 
-    // Append plaintext to the key (without non-alpha)
     int j = key_len;
     for (int i = 0; i < text_len && j < sizeof(key) - 1; i++) {
         if (isalpha(text[i])) {
@@ -33,13 +30,11 @@ void auto_key_encrypt(const char *text, const char *keyword, char *encrypted) {
     encrypted[text_len] = '\0';
 }
 
-// Decrypt with Auto Key Cipher
 void auto_key_decrypt(const char *encrypted, const char *keyword, char *decrypted) {
     int text_len = strlen(encrypted);
     int key_len = strlen(keyword);
     char current_key[512];
 
-    // Start with the keyword
     strcpy(current_key, keyword);
 
     for (int i = 0, k = 0; i < text_len; i++) {
@@ -51,7 +46,6 @@ void auto_key_decrypt(const char *encrypted, const char *keyword, char *decrypte
             int pi = ((encrypted[i] - base - (key_char - key_base) + 26) % 26);
             decrypted[i] = base + pi;
 
-            // Append decrypted char to key for next iteration
             current_key[key_len + k] = decrypted[i];
             current_key[key_len + k + 1] = '\0';
             k++;
