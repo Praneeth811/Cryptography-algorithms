@@ -2,7 +2,6 @@
 #include <ctype.h>
 #include <string.h>
 
-// Function to encrypt using Caesar cipher
 void caesar_encrypt(char *input, char *output, int key) {
     for (int i = 0; input[i] != '\0'; i++) {
         char c = input[i];
@@ -10,17 +9,14 @@ void caesar_encrypt(char *input, char *output, int key) {
             char base = isupper(c) ? 'A' : 'a';
             output[i] = ((c - base + key) % 26) + base;
         } else {
-            output[i] = c; // leave non-alphabet characters unchanged
+            output[i] = c; 
         }
     }
     output[strlen(input)] = '\0';
 }
 
-// Function to decrypt using Caesar cipher
 void caesar_decrypt(char *input, char *output, int key) {
-    caesar_encrypt(input, output, 26 - (key % 26)); // decryption is reverse of encryption
-}
-
+    caesar_encrypt(input, output, 26 - (key % 26)); 
 int main() {
     char text[256];
     char encrypted[256];
@@ -30,7 +26,6 @@ int main() {
     printf("Enter text: ");
     fgets(text, sizeof(text), stdin);
 
-    // Remove newline if present
     size_t len = strlen(text);
     if (len > 0 && text[len - 1] == '\n') {
         text[len - 1] = '\0';
