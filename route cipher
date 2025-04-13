@@ -3,29 +3,25 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-// Pad plaintext with 'X' if needed
 void pad_plaintext(char *text, int rows, int cols) {
     int len = strlen(text);
     int total = rows * cols;
     for (int i = len; i < total; i++) {
-        text[i] = 'X';  // padding character
+        text[i] = 'X';  
     }
     text[total] = '\0';
 }
 
-// Encrypt using route cipher (write row-wise, read column-wise)
 void route_encrypt(char *text, int rows, int cols, char *encrypted) {
     char matrix[rows][cols];
     int k = 0;
 
     pad_plaintext(text, rows, cols);
 
-    // Fill matrix row-wise
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
             matrix[i][j] = text[k++];
 
-    // Read column-wise
     k = 0;
     for (int j = 0; j < cols; j++)
         for (int i = 0; i < rows; i++)
@@ -34,17 +30,14 @@ void route_encrypt(char *text, int rows, int cols, char *encrypted) {
     encrypted[k] = '\0';
 }
 
-// Decrypt using route cipher (write column-wise, read row-wise)
 void route_decrypt(char *cipher, int rows, int cols, char *decrypted) {
     char matrix[rows][cols];
     int k = 0;
 
-    // Fill matrix column-wise
     for (int j = 0; j < cols; j++)
         for (int i = 0; i < rows; i++)
             matrix[i][j] = cipher[k++];
 
-    // Read row-wise
     k = 0;
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < cols; j++)
