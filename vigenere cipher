@@ -2,7 +2,6 @@
 #include <string.h>
 #include <ctype.h>
 
-// Function to generate repeating key
 void generate_key(const char *text, const char *keyword, char *key) {
     int text_len = strlen(text);
     int keyword_len = strlen(keyword);
@@ -17,7 +16,6 @@ void generate_key(const char *text, const char *keyword, char *key) {
     key[text_len] = '\0';
 }
 
-// Encrypt using Vigenère cipher
 void vigenere_encrypt(const char *text, const char *key, char *encrypted) {
     for (int i = 0; text[i] != '\0'; i++) {
         if (isalpha(text[i])) {
@@ -31,7 +29,6 @@ void vigenere_encrypt(const char *text, const char *key, char *encrypted) {
     encrypted[strlen(text)] = '\0';
 }
 
-// Decrypt using Vigenère cipher
 void vigenere_decrypt(const char *encrypted, const char *key, char *decrypted) {
     for (int i = 0; encrypted[i] != '\0'; i++) {
         if (isalpha(encrypted[i])) {
