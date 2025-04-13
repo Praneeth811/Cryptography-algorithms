@@ -26,7 +26,7 @@ void get_order(char *key, int order[]) {
         for (int j = 0; j < len; j++) {
             if (temp[i] == sorted[j]) {
                 order[i] = j;
-                sorted[j] = ' '; // avoid duplicates
+                sorted[j] = ' '; 
                 break;
             }
         }
@@ -46,7 +46,7 @@ void myszkowski_encrypt(char *text, char *key, char *encrypted) {
     char padded[padded_len + 1];
     strcpy(padded, text);
     for (int i = text_len; i < padded_len; i++)
-        padded[i] = 'X'; // padding character
+        padded[i] = 'X'; 
     padded[padded_len] = '\0';
 
     char matrix[rows][key_len];
