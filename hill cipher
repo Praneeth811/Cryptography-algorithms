@@ -3,22 +3,18 @@
 
 #define MOD 26
 
-// Convert a character to number (A=0, B=1, ..., Z=25)
 int char_to_int(char c) {
     return c - 'A';
 }
 
-// Convert number back to character
 char int_to_char(int i) {
     return i + 'A';
 }
 
-// Calculate determinant of 2x2 matrix
 int determinant(int key[2][2]) {
     return (key[0][0]*key[1][1] - key[0][1]*key[1][0]) % MOD;
 }
 
-// Calculate modular inverse of a number mod 26
 int mod_inverse(int a) {
     a = a % MOD;
     for (int i = 1; i < MOD; i++) {
@@ -28,7 +24,6 @@ int mod_inverse(int a) {
     return -1; // No inverse
 }
 
-// Calculate inverse matrix modulo 26
 int inverse_key(int key[2][2], int inv[2][2]) {
     int det = determinant(key);
     int inv_det = mod_inverse(det);
@@ -40,7 +35,6 @@ int inverse_key(int key[2][2], int inv[2][2]) {
     inv[1][0] = (-key[1][0] * inv_det) % MOD;
     inv[1][1] = ( key[0][0] * inv_det) % MOD;
 
-    // Make sure all values are positive mod 26
     for (int i = 0; i < 2; i++)
         for (int j = 0; j < 2; j++)
             inv[i][j] = (inv[i][j] + MOD) % MOD;
@@ -48,7 +42,6 @@ int inverse_key(int key[2][2], int inv[2][2]) {
     return 1;
 }
 
-// Encrypt 2-letter block
 void encrypt_block(char *plaintext, int key[2][2], char *ciphertext) {
     int p[2];
     p[0] = char_to_int(plaintext[0]);
@@ -63,7 +56,6 @@ void encrypt_block(char *plaintext, int key[2][2], char *ciphertext) {
     ciphertext[2] = '\0';
 }
 
-// Decrypt 2-letter block
 void decrypt_block(char *ciphertext, int key[2][2], char *plaintext) {
     int inv_key[2][2];
     if (!inverse_key(key, inv_key)) {
