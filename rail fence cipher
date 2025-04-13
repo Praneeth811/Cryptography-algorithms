@@ -2,7 +2,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-// Encrypt using Rail Fence Cipher
 void encryptRailFence(const char *text, int rails, char *encrypted) {
     int len = strlen(text);
     char rail[rails][len];
@@ -11,7 +10,6 @@ void encryptRailFence(const char *text, int rails, char *encrypted) {
     int row = 0;
     bool down = true;
 
-    // Fill the rail matrix
     for (int i = 0; i < len; i++) {
         rail[row][i] = text[i];
 
@@ -23,7 +21,6 @@ void encryptRailFence(const char *text, int rails, char *encrypted) {
         row += down ? 1 : -1;
     }
 
-    // Read off the matrix row-by-row
     int index = 0;
     for (int i = 0; i < rails; i++) {
         for (int j = 0; j < len; j++) {
@@ -35,13 +32,11 @@ void encryptRailFence(const char *text, int rails, char *encrypted) {
     encrypted[index] = '\0';
 }
 
-// Decrypt using Rail Fence Cipher
 void decryptRailFence(const char *cipher, int rails, char *decrypted) {
     int len = strlen(cipher);
     char rail[rails][len];
     memset(rail, 0, sizeof(rail));
 
-    // Mark the positions with '*'
     int row = 0;
     bool down = true;
     for (int i = 0; i < len; i++) {
@@ -55,7 +50,6 @@ void decryptRailFence(const char *cipher, int rails, char *decrypted) {
         row += down ? 1 : -1;
     }
 
-    // Fill the '*' positions with ciphertext characters
     int index = 0;
     for (int i = 0; i < rails; i++) {
         for (int j = 0; j < len; j++) {
@@ -65,7 +59,6 @@ void decryptRailFence(const char *cipher, int rails, char *decrypted) {
         }
     }
 
-    // Read in zigzag pattern to build plaintext
     row = 0;
     down = true;
     for (int i = 0; i < len; i++) {
