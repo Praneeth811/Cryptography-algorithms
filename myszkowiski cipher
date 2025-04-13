@@ -33,7 +33,7 @@ void get_order(char *key, int order[]) {
     }
 }
 
-// Myszkowski Cipher Encryption Function
+
 void myszkowski_encrypt(char *text, char *key, char *encrypted) {
     to_upper(text);
     to_upper(key);
@@ -41,7 +41,6 @@ void myszkowski_encrypt(char *text, char *key, char *encrypted) {
     int key_len = strlen(key);
     int text_len = strlen(text);
 
-    // Padding text to fit matrix
     int rows = (text_len + key_len - 1) / key_len;
     int padded_len = rows * key_len;
     char padded[padded_len + 1];
@@ -50,18 +49,15 @@ void myszkowski_encrypt(char *text, char *key, char *encrypted) {
         padded[i] = 'X'; // padding character
     padded[padded_len] = '\0';
 
-    // Create matrix
     char matrix[rows][key_len];
     int index = 0;
     for (int i = 0; i < rows; i++)
         for (int j = 0; j < key_len; j++)
             matrix[i][j] = padded[index++];
 
-    // Get column order based on keyword
     int order[key_len];
     get_order(key, order);
 
-    // Read columns in sorted order of keyword's numeric values
     index = 0;
     for (int k = 0; k < key_len; k++) {
         for (int i = 0; i < key_len; i++) {
