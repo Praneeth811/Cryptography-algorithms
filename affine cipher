@@ -2,7 +2,6 @@
 #include <ctype.h>
 #include <string.h>
 
-// Function to compute modular inverse of a under modulo m
 int mod_inverse(int a, int m) {
     a = a % m;
     for (int x = 1; x < m; x++) {
@@ -12,7 +11,6 @@ int mod_inverse(int a, int m) {
     return -1; // Inverse doesn't exist
 }
 
-// Encrypt using Affine cipher
 void affine_encrypt(char *input, char *output, int a, int b) {
     for (int i = 0; input[i] != '\0'; i++) {
         char c = input[i];
@@ -26,7 +24,6 @@ void affine_encrypt(char *input, char *output, int a, int b) {
     output[strlen(input)] = '\0';
 }
 
-// Decrypt using Affine cipher
 void affine_decrypt(char *input, char *output, int a, int b) {
     int a_inv = mod_inverse(a, 26);
     if (a_inv == -1) {
